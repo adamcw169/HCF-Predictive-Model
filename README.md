@@ -7,31 +7,9 @@ actually did, and applies that correction to a new target geometry.
 
 Fully offline. No network access anywhere, no server, no browser.
 
-This is a **standalone project**. It shares no code with the HCF Draw Predictor
-in the parent folder - that app is a design reference and a source of
-conventions only. The two do share a data schema, deliberately: a CSV written
-for one is readable by the other.
+This is a **standalone project**.
 
 ---
-
-## Why this is a different model, not a refinement of the other one
-
-A real steady-state extraction from one draw run yields about **eight**
-independent points. The 3,465-row dataset the other app trains on is one run
-sampled at 1 Hz - not 3,465 experiments. Consecutive rows one second apart are
-not independent observations of anything.
-
-At n≈8 across six input dimensions, a RandomForest or a Gaussian process can
-interpolate the eight points it has and nothing else. It cannot identify real
-structure, it cannot be checked against its own uncertainty in any meaningful
-way, and it cannot transfer to a new preform geometry, because everything it
-knows is memorised from this one.
-
-What *can* be identified from eight points is two to four parameters, expressed
-in dimensionless terms, weighted by how well each point is measured. That is
-what this app fits. Every coefficient comes with a confidence interval, and the
-app says plainly when a coefficient is not distinguishable from zero - which,
-on the current single run, is true of the draw-down term for every channel.
 
 ## What changed in v1.10 (tubular / NANF / DNANF)
 
