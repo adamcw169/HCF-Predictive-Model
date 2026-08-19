@@ -1,0 +1,35 @@
+# HCF Anchor Predictor - runtime and build dependencies.
+# Versions are the ones this app was developed and tested against
+# (Python 3.14.6, Windows 11).
+
+PySide6==6.11.1
+pandas==3.0.5
+numpy==2.5.1
+scipy==1.18.0
+matplotlib==3.11.1
+joblib==1.5.3
+
+# Hover-to-read-exact-value on every plot. Pure Python and small; zoom and pan
+# come from matplotlib's own Qt navigation toolbar and need nothing extra. The
+# app degrades to plots that still draw and still zoom if this is absent - see
+# PlotPanel.hover_available - so it is not load-bearing.
+mplcursors==0.7.1
+
+# Build only - not needed to run from source.
+pyinstaller==6.22.0
+
+# Test only - not needed to run the app or build the exe.
+pytest
+
+# Test only. The weighted least squares in calibration.py is implemented on
+# numpy and scipy - at two to four parameters it is a handful of lines, and
+# keeping it local means the covariance convention and the interval convention
+# live in the same file as the model. statsmodels is used by
+# tests/test_calibration.py purely as an independent cross-check of those
+# numbers; the app never imports it, and app.spec excludes it from the exe.
+statsmodels
+
+# Deliberately absent: scikit-learn. This app is the small-data counterpart to
+# the HCF Draw Predictor - a handful of identifiable parameters, not a forest or
+# a Gaussian process. Nothing here imports it and app.spec excludes it, which is
+# also most of why this exe is a fraction of that app's size.
